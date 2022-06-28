@@ -20,7 +20,13 @@ body header img {
     display: block;
 }
 
+
+
 nav {
+    overflow: hidden;
+}
+
+kontakt {
     overflow: hidden;
 }
 
@@ -36,6 +42,18 @@ a.menu {
     font-size: 20px;
     -webkit-transition: all 1s ease;
     transition: all 1s ease;
+}
+
+a.kontakt {
+    display: block;
+    width: 50%;
+    color: red;
+    float: right;
+    text-align: center;
+    text-decoration: none;
+    background-color: aqua;
+    padding: 15px 30px;
+    
 }
 
 a.menu:hover {

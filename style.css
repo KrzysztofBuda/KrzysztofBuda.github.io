@@ -20,13 +20,7 @@ body header img {
     display: block;
 }
 
-
-
 nav {
-    overflow: hidden;
-}
-
-kontakt {
     overflow: hidden;
 }
 
@@ -44,33 +38,9 @@ a.menu {
     transition: all 1s ease;
 }
 
-a.kontakt {
-    display: block;
-    width: 50%;
-    color: red;
-    float: right;
-    text-align: center;
-    text-decoration: none;
-    background-color: aqua;
-    padding: 15px 30px;
-    
-}
-
 a.menu:hover {
     background-color: crimson;
     cursor: pointer;
-}
-
-@media (max-width:800px) {
-    a.menu {
-        width: 50%;
-    }
-}
-
-@media (max-width:500px) {
-    a.menu {
-        width: 100%;
-    }
 }
 
 a.active {
@@ -91,7 +61,7 @@ article h1 {
     border-bottom: 2px solid crimson;
 }
 
-img.left {
+img.moje {
     float: left;
     padding: 0 10px 10px 0;
     width: 25%;
@@ -105,9 +75,113 @@ article p {
     padding: 15px 0;
 }
 
-iframe {
+/*~~~~~~~~~~~~~~~~~~~~~~
+     strona kontakt 
+~~~~~~~~~~~~~~~~~~~~~~~~*/
+kontaktbutton {
+    overflow: hidden;
+}
+
+a.kontaktbutton {
+    display: block;
+    width: 50%;
+    color: red;
+    float: right;
+    text-align: center;
+    text-decoration: none;
+    background-color: aqua;
+    padding: 15px 30px;
+    
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~
+        strona cv 
+~~~~~~~~~~~~~~~~~~~~~~~~*/
+div.count {
     width: 100%;
 }
+
+div.lewacv {
+    width: 25%;
+    max-width: 250px;
+    background-color: darkcyan;
+    display: block;
+    color: white;
+    padding: 10px;
+    height: 1280px;
+    position:absolute;
+}
+
+div.prawacv {
+    margin-left: 25%;
+    padding: 30px;
+
+}
+img.imagecv {
+    text-align: center;
+    width: 100%;
+}
+
+div.lewacv h1 {
+    font-size: 50px;
+    
+}
+
+div.lewacv h3 {
+    margin-top: 20px;
+    
+}
+
+div.lewacv p {
+    margin-left: 10px;
+}
+
+div.prawacv h1{    
+    padding-bottom: 10px;
+    border-bottom: 1px solid crimson;
+    margin-top: 40px
+}
+
+div.prawacv h5 {
+    text-align: right;
+    padding: 4px;
+}
+
+div.prawacv h3 {
+    margin: 5px
+}
+
+div.prawacv p {
+    margin: 0 15px;
+}
+div.prawacv h2 {
+    font-size: 17px;
+    margin-left: 6px;
+}
+
+/* zmiany rozmiaru */
+@media (max-width:800px) {
+    a.menu {
+        width: 50%;
+    }
+    a.kontaktbutton {
+        width: 50%;
+    }
+}
+
+@media (max-width:500px) {
+    a.menu {
+        width: 100%;
+    }
+    a.kontaktbutton {
+        width: 100%;
+    }
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~
+        stopka 
+~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 
 footer {
     height: 40px;

@@ -99,12 +99,12 @@ a.kontaktbutton {
 ~~~~~~~~~~~~~~~~~~~~~~~~*/
 div.count {
     width: 100%;
+    background-color: darkcyan;
 }
 
 div.lewacv {
     width: 25%;
     max-width: 250px;
-    background-color: darkcyan;
     display: block;
     color: white;
     padding: 10px;
@@ -115,6 +115,7 @@ div.lewacv {
 div.prawacv {
     margin-left: 25%;
     padding: 30px;
+    background-color: white;
 
 }
 img.imagecv {

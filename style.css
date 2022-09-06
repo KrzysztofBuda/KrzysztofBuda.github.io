@@ -75,9 +75,34 @@ article p {
     padding: 15px 0;
 }
 
+div.doprojektow {
+    width: 100%;
+    padding: 20px;
+    background-color: #ff0000;
+    border: 3px solid black;
+
+}
+
+a.projektybtn{
+    padding: 10px 30px;
+    text-decoration: none;
+    text-align: center;
+    background-color: aqua;
+    margin-left: 20%;
+    border-radius: 30% 10%;
+    transition: all 1s ease;
+}
+a.projektybtn:hover {
+    background-color: azure;
+    padding: 20px 40px;
+    margin-left: 19%;
+    border-radius: 10% 30%;
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~
      strona kontakt 
 ~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 kontaktbutton {
     overflow: hidden;
 }
@@ -97,13 +122,15 @@ a.kontaktbutton {
 /*~~~~~~~~~~~~~~~~~~~~~~
         strona cv 
 ~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
 div.count {
     width: 100%;
     background-color: darkcyan;
 }
 
 div.lewacv {
-    width: 25%;
+    width: 30%;
     max-width: 250px;
     display: block;
     color: white;
@@ -113,11 +140,11 @@ div.lewacv {
 }
 
 div.prawacv {
-    margin-left: 25%;
+    margin-left: 30%;
     padding: 30px;
     background-color: white;
-
 }
+
 img.imagecv {
     text-align: center;
     width: 100%;
@@ -160,6 +187,36 @@ div.prawacv h2 {
     margin-left: 6px;
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~
+        PROJEKTY
+~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+body.bodyprojekt {
+    background-color: white;
+}
+
+body.bodyprojekt a.menu {
+    background-color: #00FF00;
+}
+
+body.bodyprojekt a.menu:hover {
+    background-color: #FF0000;
+}
+
+div.projekty {
+    color: white;
+}
+
+div.pierwszyprojekt {
+    background-color: #262626;
+}
+
+div.drugiprojekt {
+    background-color: #191919
+}
+
+
 /* zmiany rozmiaru */
 @media (max-width:800px) {
     a.menu {
@@ -168,6 +225,12 @@ div.prawacv h2 {
     a.kontaktbutton {
         width: 50%;
     }
+    div.lawacv {
+        width: 40%;
+    }
+    div.prawacv {
+        margin-left: 40%;
+    }   
 }
 
 @media (max-width:500px) {
@@ -182,7 +245,6 @@ div.prawacv h2 {
 /*~~~~~~~~~~~~~~~~~~~~~~
         stopka 
 ~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 
 footer {
     height: 40px;

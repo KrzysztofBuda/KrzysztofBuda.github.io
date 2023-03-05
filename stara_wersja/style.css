@@ -1,0 +1,256 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, arial;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #ddb;
+}
+
+#wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+body header img {
+    width: 100%;
+    display: block;
+}
+
+nav {
+    overflow: hidden;
+}
+
+a.menu {
+    display: block;
+    width: 25%;
+    float: left;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    background-color: darkcyan;
+    padding: 15px 30px;
+    font-size: 20px;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+a.menu:hover {
+    background-color: crimson;
+    cursor: pointer;
+}
+
+a.active {
+    background-color: crimson;
+}
+
+article {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+article h1 {
+    font-size: 30px;
+    text-align: center;
+    margin: 0 10% 20px 10%;
+    padding-bottom: 15px;
+    border-bottom: 2px solid crimson;
+}
+
+img.moje {
+    float: left;
+    padding: 0 10px 10px 0;
+    width: 25%;
+    border-radius: 50%;
+}
+
+article p {
+    text-align: justify;
+    line-height: 25px;
+    font-size: 18px;
+    padding: 15px 0;
+}
+
+div.doprojektow {
+    width: 100%;
+    padding: 20px;
+    background-color: #ff0000;
+    border: 3px solid black;
+
+}
+
+a.projektybtn{
+    padding: 10px 30px;
+    text-decoration: none;
+    text-align: center;
+    background-color: aqua;
+    margin-left: 20%;
+    border-radius: 30% 10%;
+    transition: all 1s ease;
+}
+a.projektybtn:hover {
+    background-color: azure;
+    padding: 20px 40px;
+    margin-left: 19%;
+    border-radius: 10% 30%;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~
+     strona kontakt 
+~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+kontaktbutton {
+    overflow: hidden;
+}
+
+a.kontaktbutton {
+    display: block;
+    width: 50%;
+    color: red;
+    float: right;
+    text-align: center;
+    text-decoration: none;
+    background-color: aqua;
+    padding: 15px 30px;
+    
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~
+        strona cv 
+~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+div.count {
+    width: 100%;
+    background-color: darkcyan;
+}
+
+div.lewacv {
+    width: 30%;
+    max-width: 250px;
+    display: block;
+    color: white;
+    padding: 10px;
+    height: 1280px;
+    position:absolute;
+}
+
+div.prawacv {
+    margin-left: 30%;
+    padding: 30px;
+    background-color: white;
+}
+
+img.imagecv {
+    text-align: center;
+    width: 100%;
+}
+
+div.lewacv h1 {
+    font-size: 50px;
+    
+}
+
+div.lewacv h3 {
+    margin-top: 20px;
+    
+}
+
+div.lewacv p {
+    margin-left: 10px;
+}
+
+div.prawacv h1{    
+    padding-bottom: 10px;
+    border-bottom: 1px solid crimson;
+    margin-top: 40px
+}
+
+div.prawacv h5 {
+    text-align: right;
+    padding: 4px;
+}
+
+div.prawacv h3 {
+    margin: 5px
+}
+
+div.prawacv p {
+    margin: 0 15px;
+}
+div.prawacv h2 {
+    font-size: 17px;
+    margin-left: 6px;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~
+        PROJEKTY
+~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+body.bodyprojekt {
+    background-color: white;
+}
+
+body.bodyprojekt a.menu {
+    background-color: #00FF00;
+}
+
+body.bodyprojekt a.menu:hover {
+    background-color: #FF0000;
+}
+
+div.projekty {
+    color: white;
+}
+
+div.pierwszyprojekt {
+    background-color: #262626;
+}
+
+div.drugiprojekt {
+    background-color: #191919
+}
+
+
+/* zmiany rozmiaru */
+@media (max-width:800px) {
+    a.menu {
+        width: 50%;
+    }
+    a.kontaktbutton {
+        width: 50%;
+    }
+    div.lawacv {
+        width: 40%;
+    }
+    div.prawacv {
+        margin-left: 40%;
+    }   
+}
+
+@media (max-width:500px) {
+    a.menu {
+        width: 100%;
+    }
+    a.kontaktbutton {
+        width: 100%;
+    }
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~
+        stopka 
+~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+footer {
+    height: 40px;
+    background-color: darkcyan;
+    color: white;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 10px;
+}

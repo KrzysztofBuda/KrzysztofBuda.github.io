@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- Strona początkowa-->
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset = "UTF-8">
+        <title> menu   </title>
+        <link rel="stylesheet" href="stylemain.css">
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class = "sidebar">
+            <div class = "logo-details">
+                <i class='bx bxs-keyboard' ></i>
+                <span class = "logo_name">Krzysiek</span>
+            </div>
+            <ul class = "nav-links">
+                <li>
+                    <a href="#" class="tab-link active" id="tabMain-link">
+                        <i class='bx bxs-user-circle'></i>
+                        <span class="link_name" >O mnie</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class = "link_name" href="#">Projekty</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class = "icon-link">
+                        <a href="#">
+                            <i class='bx bx-collection' ></i>
+                            <span  class="link_name">Projekty</span>
+                        </a>
+                        <i class='bx bx-chevron-down arrow' ></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class = "link_name" href="#">Category</a></li>
+                        <li><a href="#" class="tab-link" id="tabCpp-link">C++</a></li>
+                        <li><a href="#" class="tab-link" id="tabJava-link">Java</a></li>
+                        <li><a href="#">HTML+CSS</a></li>
+                        <li><a href="#">jakies inne kategorie</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class = "icon-link">
+                        <a href="#">
+                            <i class='bx bx-book' ></i>
+                            <span  class="link_name">Posts</span>
+                        </a>
+                        <i class='bx bx-chevron-down arrow' ></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class = "link_name" href="#">Posts</a></li>
+                        <li><a href="#">Post1</a></li>
+                        <li><a href="#">Post2</a></li>
+                        <li><a href="#">Post3</a></li>
+                        <li><a href="#">jakies inne kategorie</a></li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bx-analyse'></i>
+                        <span class="link_name" >Statystyki</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class = "link_name" href="#">Statystyki</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class = "tab-link"  id="tabKontakt-link">
+                        <i class='bx bxs-contact'></i>
+                        <span class="link_name" >Kontakt</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a href="#" class = "link_name" >Kontakt</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <section class="home-section">
+            <div class="home-content">
+                <i class='bx bx-menu'></i>
+                <span class="tekst">Drop Down Sidebar</span>
+                </div> 
+            
+            <div class="tabs">
+                <div class="tab-content show" id="tabMain">
+                    <H1>O mnie!</H1>
+                    <p>Jestem  w trakcie pisania strony</p>
+                </div>
+                <div class="tab-content" id="tabCpp">
+                    <h1>CPP</h1>
+                    <p>info cpp</p>
+                </div>
+                <div class="tab-content" id="tabJava">
+                    <h1>Java</h1>
+                    <p> Tekst java</p>
+                </div>
+<!---------KONTAK---------->
+                <div class="tab-content" id="tabKontakt">
+                    <div class="box">
+                        <div class="form">
+                            <a href="#">
+                                <i class='bx bx-envelope'></i>
+                                <span  class="link_name">buda.krzysztof00@gmail.com</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/krzysztof-buda/">
+                                <i class='bx bxl-linkedin'></i>
+                                <span  class="link_name">linkedin</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </section>
+        
+        <script src = "script.js"></script>
+        
+    </body>
+</html>

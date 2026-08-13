@@ -1,6 +1,8 @@
 export const translations = {
   pl: {
     navbar: {
+      home: "Strona główna",
+      menu: "Menu",
       projects: "Projekty",
       skills: "Umiejętności",
       about: "O mnie",
@@ -162,6 +164,8 @@ export const translations = {
 
   en: {
     navbar: {
+      home: "Home",
+      menu: "Menu",
       projects: "Projects",
       skills: "Skills",
       about: "About",
@@ -171,7 +175,7 @@ export const translations = {
     hero: {
       availability: "Available for opportunities",
 
-      titleLine1: "I build things,",
+      titleLine1: "I build things",
       titleLine2: "that",
       titleAccent: "work.",
 

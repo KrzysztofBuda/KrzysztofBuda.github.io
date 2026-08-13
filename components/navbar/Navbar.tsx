@@ -53,8 +53,8 @@ export default function Navbar() {
     section: string,
   ) => {
     /*
-     * Na podstronie projektu nie przejmujemy kliknięcia.
-     * Przeglądarka przejdzie normalnie do:
+     * Na podstronie projektu pozwalamy
+     * przeglądarce przejść normalnie do:
      *
      * /#projects
      * /#skills
@@ -67,7 +67,8 @@ export default function Navbar() {
 
     /*
      * Na stronie głównej zawsze przejmujemy
-     * kliknięcie, niezależnie od obecnego hasha.
+     * kliknięcie, również gdy hash jest już
+     * ustawiony na tę samą sekcję.
      */
     event.preventDefault();
 
@@ -80,20 +81,12 @@ export default function Navbar() {
       return;
     }
 
-    /*
-     * Najpierw aktualizujemy URL.
-     * Nie polegamy jednak na hash navigation
-     * do wykonania scrolla.
-     */
     window.history.replaceState(
       null,
       "",
       `#${section}`,
     );
 
-    /*
-     * Scroll wykonujemy sami za każdym razem.
-     */
     target.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -110,7 +103,7 @@ export default function Navbar() {
             href="/"
             onClick={closeMenu}
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-black/40 font-mono text-sm font-semibold text-white backdrop-blur-xl transition-colors hover:border-white/20 hover:bg-white/[0.06]"
-            aria-label="Strona główna"
+            aria-label={t.navbar.home}
           >
             KB.
           </Link>
@@ -209,7 +202,7 @@ export default function Navbar() {
                   (current) => !current,
                 )
               }
-              aria-label="Menu"
+              aria-label={t.navbar.menu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white backdrop-blur-xl transition-colors hover:border-white/20 hover:bg-white/[0.06] md:hidden"
@@ -248,23 +241,21 @@ export default function Navbar() {
               className="mt-3 overflow-hidden rounded-2xl border border-white/10 bg-[#09090b]/95 p-2 shadow-2xl backdrop-blur-xl md:hidden"
             >
               <div className="flex flex-col">
-                {navigation.map(
-                  (item) => (
-                    <a
-                      key={item.section}
-                      href={`/#${item.section}`}
-                      onClick={(event) =>
-                        handleSectionClick(
-                          event,
-                          item.section,
-                        )
-                      }
-                      className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition-colors hover:bg-white/[0.05] hover:text-white"
-                    >
-                      {item.label}
-                    </a>
-                  ),
-                )}
+                {navigation.map((item) => (
+                  <a
+                    key={item.section}
+                    href={`/#${item.section}`}
+                    onClick={(event) =>
+                      handleSectionClick(
+                        event,
+                        item.section,
+                      )
+                    }
+                    className="rounded-xl px-4 py-3 text-sm text-zinc-400 transition-colors hover:bg-white/[0.05] hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                ))}
               </div>
 
               {/* MOBILE SOCIALS */}

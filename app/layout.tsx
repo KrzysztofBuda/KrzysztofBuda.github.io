@@ -17,6 +17,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    "https://krzysztofbuda.github.io",
+  ),
+
+  alternates: {
+    canonical: "/",
+  },
+
   title: {
     default: "Krzysztof Buda — Developer",
     template: "%s | Krzysztof Buda",
@@ -58,6 +66,8 @@ export const metadata: Metadata = {
     title: "Krzysztof Buda — Developer",
     description:
       "Backend, API, Android, Python, Kotlin, SQL, systemy embedded i integracje ze sprzętem.",
+    url: "/",
+    siteName: "Krzysztof Buda — Portfolio",
     type: "website",
   },
 

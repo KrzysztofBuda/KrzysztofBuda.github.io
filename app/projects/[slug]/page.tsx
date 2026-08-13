@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import ProjectDetails from "@/components/projects/details/ProjectDetails";
 import { translations } from "@/components/language/translations";
+import ProjectDetails from "@/components/projects/details/ProjectDetails";
 import {
+  getProjectBySlug,
   projectSlugs,
   type ProjectSlug,
 } from "@/data/projects";
@@ -29,21 +30,34 @@ export async function generateMetadata({
     return {};
   }
 
-  const projectSlug = slug as ProjectSlug;
+  const projectData = getProjectBySlug(
+    slug as ProjectSlug,
+  );
+
+  if (!projectData) {
+    return {};
+  }
 
   const project =
-    projectSlug === "mobile-waiter"
-      ? translations.pl.projects.mobileWaiter
-      : translations.pl.projects.garage;
+    translations.pl.projects[
+      projectData.translationKey
+    ];
+
+  const projectUrl = `/projects/${slug}/`;
 
   return {
     title: project.title,
 
     description: project.description,
 
+    alternates: {
+      canonical: projectUrl,
+    },
+
     openGraph: {
       title: `${project.title} | Krzysztof Buda`,
       description: project.description,
+      url: projectUrl,
       type: "article",
     },
 

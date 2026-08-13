@@ -4,7 +4,7 @@ import {
   createContext,
   useContext,
   useEffect,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -24,25 +24,76 @@ const LanguageContext =
 
 const STORAGE_KEY = "portfolio-language";
 
+const LANGUAGE_CHANGE_EVENT =
+  "portfolio-language-change";
+
+function isLanguage(
+  value: string | null,
+): value is Language {
+  return value === "pl" || value === "en";
+}
+
+function getLanguageSnapshot(): Language {
+  const savedLanguage =
+    window.localStorage.getItem(STORAGE_KEY);
+
+  return isLanguage(savedLanguage)
+    ? savedLanguage
+    : "pl";
+}
+
+function getServerSnapshot(): Language {
+  return "pl";
+}
+
+function subscribeToLanguage(
+  callback: () => void,
+) {
+  const handleStorage = (
+    event: StorageEvent,
+  ) => {
+    if (event.key === STORAGE_KEY) {
+      callback();
+    }
+  };
+
+  const handleLocalChange = () => {
+    callback();
+  };
+
+  window.addEventListener(
+    "storage",
+    handleStorage,
+  );
+
+  window.addEventListener(
+    LANGUAGE_CHANGE_EVENT,
+    handleLocalChange,
+  );
+
+  return () => {
+    window.removeEventListener(
+      "storage",
+      handleStorage,
+    );
+
+    window.removeEventListener(
+      LANGUAGE_CHANGE_EVENT,
+      handleLocalChange,
+    );
+  };
+}
+
 export function LanguageProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [language, setLanguageState] =
-    useState<Language>("pl");
-
-  useEffect(() => {
-    const savedLanguage =
-      window.localStorage.getItem(STORAGE_KEY);
-
-    if (
-      savedLanguage === "pl" ||
-      savedLanguage === "en"
-    ) {
-      setLanguageState(savedLanguage);
-    }
-  }, []);
+  const language = useSyncExternalStore(
+    subscribeToLanguage,
+    getLanguageSnapshot,
+    getServerSnapshot,
+  );
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -51,11 +102,13 @@ export function LanguageProvider({
   function setLanguage(
     newLanguage: Language,
   ) {
-    setLanguageState(newLanguage);
-
     window.localStorage.setItem(
       STORAGE_KEY,
       newLanguage,
+    );
+
+    window.dispatchEvent(
+      new Event(LANGUAGE_CHANGE_EVENT),
     );
   }
 

@@ -133,6 +133,32 @@ export default function ProjectDetails({
           </div>
         </section>
 
+
+          {/* STATIC SYNC */}
+
+          <section className="px-4 py-20 sm:px-6 sm:py-28">
+            <div className="mx-auto max-w-6xl">
+              <div className="grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
+                <div>
+                  <SectionLabel>
+                    {project.staticSync.title}
+                  </SectionLabel>
+                </div>
+
+                <div>
+                  <p className="max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
+                    {project.staticSync.description}
+                  </p>
+
+                  <StaticSyncDiagram
+                    diagram={project.staticSync.diagram}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+
         {/* CURRENT STATE */}
 
         <ListSection
@@ -579,6 +605,196 @@ function AppScreenshot({
         height={669}
         className="h-auto w-full max-w-[260px] rounded-xl border border-white/10"
       />
+    </div>
+  );
+}
+
+
+function StaticSyncDiagram({
+  diagram,
+}: {
+  diagram: {
+    source: string;
+    server: string;
+    stream: string;
+    staging: string;
+    validation: string;
+    active: string;
+    application: string;
+
+    sourceDetails: string;
+    serverDetails: string;
+    streamDetails: string;
+    stagingDetails: string;
+    validationDetails: string;
+    activeDetails: string;
+    applicationDetails: string;
+
+    success: string;
+    failure: string;
+    successDescription: string;
+    failureDescription: string;
+  };
+}) {
+  return (
+    <div className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-[#08080b] p-5 sm:p-8">
+      {/* INPUT FLOW */}
+
+      <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
+        <SyncNode
+          label={diagram.source}
+          title="Firebird"
+          description={diagram.sourceDetails}
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.server}
+          title="FastAPI"
+          description={diagram.serverDetails}
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.stream}
+          title="NDJSON"
+          description={diagram.streamDetails}
+        />
+      </div>
+
+      {/* DOWN */}
+
+      <div className="flex justify-center py-4 text-zinc-700">
+        ↓
+      </div>
+
+      {/* LOCAL PROCESS */}
+
+      <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
+        <SyncNode
+          label={diagram.staging}
+          title="Room"
+          description={diagram.stagingDetails}
+          accent
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.validation}
+          title="Validate"
+          description={
+            diagram.validationDetails
+          }
+        />
+      </div>
+
+      {/* RESULT */}
+
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
+        {/* SUCCESS */}
+
+        <div className="rounded-xl border border-emerald-400/15 bg-emerald-400/[0.04] p-4 sm:p-5">
+          <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-300">
+            ✓ {diagram.success}
+          </div>
+
+          <div className="mt-3 text-sm font-medium text-zinc-200">
+            {diagram.successDescription}
+          </div>
+
+          <div className="mt-4 flex flex-col gap-3">
+            <SyncNode
+              label={diagram.active}
+              title="ACTIVE"
+              description={
+                diagram.activeDetails
+              }
+            />
+
+            <div className="text-center text-zinc-700">
+              ↓
+            </div>
+
+            <SyncNode
+              label={diagram.application}
+              title="Android"
+              description={
+                diagram.applicationDetails
+              }
+            />
+          </div>
+        </div>
+
+        {/* FAILURE */}
+
+        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
+          <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-500">
+            × {diagram.failure}
+          </div>
+
+          <div className="mt-3 text-sm font-medium leading-6 text-zinc-400">
+            {diagram.failureDescription}
+          </div>
+
+          <div className="mt-6 rounded-xl border border-dashed border-white/10 px-4 py-5 text-center">
+            <div className="font-mono text-[9px] tracking-[0.2em] text-zinc-600">
+              PREVIOUS ACTIVE
+            </div>
+
+            <div className="mt-2 text-sm text-zinc-400">
+              ✓ preserved
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SyncNode({
+  label,
+  title,
+  description,
+  accent = false,
+}: {
+  label: string;
+  title: string;
+  description: string;
+  accent?: boolean;
+}) {
+  return (
+    <div
+      className={`rounded-xl border p-4 ${
+        accent
+          ? "border-violet-400/20 bg-violet-400/[0.05]"
+          : "border-white/10 bg-white/[0.025]"
+      }`}
+    >
+      <div className="font-mono text-[9px] uppercase tracking-[0.18em] text-violet-400">
+        {label}
+      </div>
+
+      <div className="mt-2 text-base font-medium text-zinc-100">
+        {title}
+      </div>
+
+      <div className="mt-1 text-xs leading-5 text-zinc-600">
+        {description}
+      </div>
+    </div>
+  );
+}
+
+function SyncArrow() {
+  return (
+    <div className="flex items-center justify-center text-zinc-700">
+      <span className="md:hidden">↓</span>
+      <span className="hidden md:inline">
+        →
+      </span>
     </div>
   );
 }

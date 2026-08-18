@@ -74,8 +74,9 @@ export const pl = {
             title: "Architektura",
 
             description:
-                "System został podzielony na aplikację Android oraz lokalny backend. Klient mobilny komunikuje się z serwerem przez REST API i JSON, a backend odpowiada za autoryzację, logikę biznesową oraz dostęp do bazy Firebird systemu POS.",
-
+              "System składa się z natywnej aplikacji Android oraz lokalnego backendu. Klient komunikuje się z serwerem przez REST API, a dane statyczne są przesyłane strumieniowo w formacie NDJSON i zapisywane lokalnie w Room. Backend odpowiada za integrację z bazą Firebird systemu POS, autoryzację oraz logikę biznesową.",
+            
+            
             diagram: {
                 mobileClient: "KLIENT MOBILNY",
                 localServer: "LOKALNY SERWER",
@@ -95,19 +96,59 @@ export const pl = {
             },
         },
 
+
+        staticSync: {
+          title: "Synchronizacja danych statycznych",
+
+          description:
+            "Nowe dane nie zastępują od razu lokalnej kopii używanej przez aplikację. Snapshot jest najpierw pobierany strumieniowo, zapisywany jako STAGING i walidowany. Dopiero poprawny zestaw danych zostaje atomowo aktywowany. W przypadku błędu poprzedni ACTIVE snapshot pozostaje dostępny.",
+
+          diagram: {
+            source: "BAZA POS",
+            server: "LOKALNY SERWER",
+            stream: "NDJSON STREAM",
+            staging: "STAGING",
+            validation: "WALIDACJA",
+            active: "ACTIVE",
+            application: "ANDROID UI",
+
+            sourceDetails: "Dane statyczne",
+            serverDetails: "FastAPI",
+            streamDetails: "Strumieniowe chunki",
+            stagingDetails: "Room snapshot",
+            validationDetails:
+              "Schema · kolejność · relacje",
+            activeDetails:
+              "Poprawna wersja danych",
+            applicationDetails:
+              "Dane dostępne dla UI",
+
+            success: "POPRAWNY",
+            failure: "BŁĄD",
+
+            successDescription:
+              "Atomowa aktywacja",
+
+            failureDescription:
+              "STAGING usuwany · poprzedni ACTIVE pozostaje",
+          },
+        },
+
         currentState: {
             title: "Co działa obecnie",
 
             items: [
-            "Logowanie użytkownika za pomocą PIN-u.",
-            "Autoryzacja oparta o JWT.",
-            "Identyfikacja urządzenia mobilnego.",
-            "Konfiguracja adresu lokalnego serwera.",
-            "Obsługa języka polskiego, angielskiego i ukraińskiego.",
-            "Motyw systemowy, jasny i ciemny.",
-            "Backend oparty o FastAPI z podziałem na routery, serwisy i repozytoria.",
-            "Integracja backendu z bazą danych Firebird.",
-            "Podstawowa obsługa użytkowników, uprawnień, rachunków i pozycji zamówień.",
+              "Logowanie użytkownika za pomocą PIN-u i sesja oparta o JWT.",
+              "Identyfikacja każdej instalacji aplikacji przez własny UUID urządzenia.",
+              "Konfiguracja protokołu, adresu i portu lokalnego serwera.",
+              "Synchronizacja danych statycznych z backendu do lokalnej bazy Room.",
+              "Strumieniowe przetwarzanie snapshotu w formacie NDJSON.",
+              "Synchronizacja sal, stolików, produktów, grup, VAT, metod płatności, komentarzy i struktury menu.",
+              "Walidacja kolejności danych, chunków, wersji schematu i relacji między rekordami.",
+              "Bezpieczne stagingowanie nowego snapshotu przed jego aktywacją.",
+              "Atomowa aktywacja poprawnych danych z zachowaniem poprzedniej wersji w przypadku błędu.",
+              "Ręczna synchronizacja dostępna bez logowania bezpośrednio z ekranu PIN.",
+              "Obsługa języka polskiego, angielskiego i ukraińskiego oraz motywu systemowego, jasnego i ciemnego.",
             ],
         },
 
@@ -115,12 +156,12 @@ export const pl = {
             title: "Najciekawsze elementy techniczne",
 
             items: [
-            "Integracja nowoczesnej aplikacji Android z istniejącym środowiskiem POS.",
-            "Oddzielenie klienta mobilnego od bezpośredniego dostępu do bazy danych.",
-            "Warstwowa architektura backendu: router → service → repository → baza danych.",
-            "Komunikacja REST API pomiędzy aplikacją a lokalnym serwerem.",
-            "Autoryzacja JWT powiązana z użytkownikiem i urządzeniem.",
-            "Projektowanie z zachowaniem kompatybilności od Androida 9.",
+              "Snapshot-based synchronization z lokalną bazą Room zamiast bezpośredniej pracy klienta na bazie POS.",
+              "Strumieniowe przesyłanie dużych zestawów danych przez NDJSON.",
+              "Staging i atomowa aktywacja snapshotu — błędna synchronizacja nie zastępuje ostatniej poprawnej wersji danych.",
+              "Walidacja integralności danych obejmująca kolejność stage, chunki oraz relacje między encjami.",
+              "Niezależne wersjonowanie kontraktu synchronizacji i schematu lokalnej bazy danych.",
+              "Warstwowa architektura oddzielająca klienta Android, API, logikę biznesową i bazę Firebird.",
             ],
         },
 
@@ -128,13 +169,14 @@ export const pl = {
             title: "Dalszy rozwój",
 
             items: [
-            "Główny panel pracy kelnera po zalogowaniu.",
-            "Synchronizacja danych z systemem POS.",
-            "Pełna obsługa stolików i rachunków.",
-            "Dodawanie i edycja pozycji zamówień.",
-            "Obsługa komentarzy i modyfikatorów pozycji.",
-            "Rozszerzenie obsługi urządzeń i drukowania.",
-            "Dalsze testy integracyjne backendu i aplikacji mobilnej.",
+              "Udostępnienie danych ACTIVE snapshotu warstwie UI.",
+              "Ekran wyboru sali i odwzorowanie fizycznego układu stolików.",
+              "Obsługa otwartych rachunków i dynamicznych statusów stolików.",
+              "Tworzenie rachunku i dodawanie produktów z zsynchronizowanego menu.",
+              "Komentarze do pozycji oraz uwagi do całego zamówienia.",
+              "Egzekwowanie uprawnień użytkowników i zasad rabatowych.",
+              "Płatności, finalizacja rachunku i integracja z drukowaniem po stronie serwera.",
+              "Rozszerzenie testów automatycznych i obsługi scenariuszy utraty połączenia.",
             ],
         },
 

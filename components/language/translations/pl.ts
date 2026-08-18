@@ -113,7 +113,8 @@ export const pl = {
             application: "ANDROID UI",
 
             sourceDetails: "Dane statyczne",
-            serverDetails: "FastAPI",
+            serverDetails:
+              "REST API · logika biznesowa",
             streamDetails: "Strumieniowe chunki",
             stagingDetails: "Room snapshot",
             validationDetails:
@@ -131,6 +132,10 @@ export const pl = {
 
             failureDescription:
               "STAGING usuwany · poprzedni ACTIVE pozostaje",
+
+            validationAction: "Walidacja",
+            previousActive: "POPRZEDNI ACTIVE",
+            preserved: "pozostaje zachowany",
           },
         },
 

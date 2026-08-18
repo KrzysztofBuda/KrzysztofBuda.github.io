@@ -111,15 +111,28 @@ export const en = {
           application: "ANDROID UI",
 
           sourceDetails: "Static data",
-          serverDetails: "FastAPI",
-          streamDetails: "Streaming chunks",
-          stagingDetails: "Room snapshot",
+
+          serverDetails:
+            "REST API · business logic",
+
+          streamDetails:
+            "Streaming chunks",
+
+          stagingDetails:
+            "Room snapshot",
+
           validationDetails:
             "Schema · ordering · relations",
+
           activeDetails:
             "Validated dataset",
+
           applicationDetails:
             "Data available to UI",
+
+          validationAction: "Validate",
+          previousActive: "PREVIOUS ACTIVE",
+          preserved: "preserved",
 
           success: "VALID",
           failure: "ERROR",
@@ -131,7 +144,6 @@ export const en = {
             "STAGING discarded · previous ACTIVE preserved",
         },
       },
-
 
       currentState: {
         title: "What works today",

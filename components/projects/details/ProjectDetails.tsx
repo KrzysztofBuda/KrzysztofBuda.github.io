@@ -77,30 +77,30 @@ export default function ProjectDetails({
           </div>
         </section>
 
-    {/* FEATURED SCREEN */}
+        {/* FEATURED SCREEN */}
 
-    <section className="px-4 sm:px-6">
-      <div className="mx-auto max-w-6xl">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#09090c] sm:rounded-3xl">
-          <GridBackground />
+        <section className="px-4 sm:px-6">
+          <div className="mx-auto max-w-6xl">
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#09090c] sm:rounded-3xl">
+              <GridBackground />
 
-          <div className="relative z-10 flex min-h-[420px] items-center justify-center px-6 py-12 sm:min-h-[560px] sm:py-16">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-[2rem] bg-violet-500/10 blur-3xl" />
+              <div className="relative z-10 flex min-h-[420px] items-center justify-center px-6 py-12 sm:min-h-[560px] sm:py-16">
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-[2rem] bg-violet-500/10 blur-3xl" />
 
-              <Image
-                src="/projects/mobile-waiter/login-dark.png"
-                alt={project.gallery.featuredAlt}
-                width={300}
-                height={669}
-                priority
-                className="relative h-auto w-[210px] rounded-[1.4rem] border border-white/10 shadow-2xl sm:w-[230px] lg:w-[250px]"
-              />
+                  <Image
+                    src="/projects/mobile-waiter/login-dark.png"
+                    alt={project.gallery.featuredAlt}
+                    width={300}
+                    height={669}
+                    priority
+                    className="relative h-auto w-[210px] rounded-[1.4rem] border border-white/10 shadow-2xl sm:w-[230px] lg:w-[250px]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
         {/* PROBLEM */}
 
@@ -133,8 +133,7 @@ export default function ProjectDetails({
           </div>
         </section>
 
-
-          {/* STATIC SYNC */}
+        {/* STATIC SYNC */}
 
           <section className="px-4 py-20 sm:px-6 sm:py-28">
             <div className="mx-auto max-w-6xl">
@@ -157,7 +156,6 @@ export default function ProjectDetails({
               </div>
             </div>
           </section>
-
 
         {/* CURRENT STATE */}
 
@@ -609,7 +607,6 @@ function AppScreenshot({
   );
 }
 
-
 function StaticSyncDiagram({
   diagram,
 }: {
@@ -629,6 +626,10 @@ function StaticSyncDiagram({
     validationDetails: string;
     activeDetails: string;
     applicationDetails: string;
+
+    validationAction: string;
+    previousActive: string;
+    preserved: string;
 
     success: string;
     failure: string;
@@ -684,7 +685,7 @@ function StaticSyncDiagram({
 
         <SyncNode
           label={diagram.validation}
-          title="Validate"
+          title={diagram.validationAction}
           description={
             diagram.validationDetails
           }
@@ -693,7 +694,7 @@ function StaticSyncDiagram({
 
       {/* RESULT */}
 
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
+      <div className="mt-5 grid items-start gap-4 md:grid-cols-2">
         {/* SUCCESS */}
 
         <div className="rounded-xl border border-emerald-400/15 bg-emerald-400/[0.04] p-4 sm:p-5">
@@ -730,7 +731,7 @@ function StaticSyncDiagram({
 
         {/* FAILURE */}
 
-        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
+        <div className="self-start rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
           <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-500">
             × {diagram.failure}
           </div>
@@ -741,11 +742,11 @@ function StaticSyncDiagram({
 
           <div className="mt-6 rounded-xl border border-dashed border-white/10 px-4 py-5 text-center">
             <div className="font-mono text-[9px] tracking-[0.2em] text-zinc-600">
-              PREVIOUS ACTIVE
+              {diagram.previousActive}
             </div>
 
             <div className="mt-2 text-sm text-zinc-400">
-              ✓ preserved
+              ✓ {diagram.preserved}
             </div>
           </div>
         </div>

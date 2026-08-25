@@ -125,9 +125,9 @@ export default function ProjectDetails({
                   {project.architecture.description}
                 </p>
 
-                <ArchitectureDiagram 
+                <ArchitectureDiagram
                   diagram={project.architecture.diagram}
-                 />
+                />
               </div>
             </div>
           </div>
@@ -135,27 +135,27 @@ export default function ProjectDetails({
 
         {/* STATIC SYNC */}
 
-          <section className="px-4 py-20 sm:px-6 sm:py-28">
-            <div className="mx-auto max-w-6xl">
-              <div className="grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
-                <div>
-                  <SectionLabel>
-                    {project.staticSync.title}
-                  </SectionLabel>
-                </div>
+        <section className="px-4 py-20 sm:px-6 sm:py-28">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
+              <div>
+                <SectionLabel>
+                  {project.staticSync.title}
+                </SectionLabel>
+              </div>
 
-                <div>
-                  <p className="max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
-                    {project.staticSync.description}
-                  </p>
+              <div>
+                <p className="max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
+                  {project.staticSync.description}
+                </p>
 
-                  <StaticSyncDiagram
-                    diagram={project.staticSync.diagram}
-                  />
-                </div>
+                <StaticSyncDiagram
+                  diagram={project.staticSync.diagram}
+                />
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
         {/* CURRENT STATE */}
 
@@ -244,13 +244,6 @@ export default function ProjectDetails({
     );
   }
 
-  /*
-   * SYSTEM GARAGE
-   *
-   * Na razie zostawiamy dotychczasową
-   * wersję strony projektu.
-   */
-
   const project = t.projects.garage;
 
   return (
@@ -265,8 +258,14 @@ export default function ProjectDetails({
         <div className="relative z-10 mx-auto max-w-6xl">
           <BackLink label={t.projects.details.back} />
 
-          <div className="mt-14 font-mono text-[10px] tracking-[0.3em] text-violet-400 sm:mt-20 sm:text-xs">
-            PROJECT / {projectData.index}
+          <div className="mt-14 flex flex-wrap items-center gap-3 sm:mt-20">
+            <div className="font-mono text-[10px] tracking-[0.3em] text-violet-400 sm:text-xs">
+              PROJECT / {projectData.index}
+            </div>
+
+            <span className="rounded-full border border-emerald-400/20 bg-emerald-400/[0.08] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-emerald-300 sm:text-[10px]">
+              {project.status}
+            </span>
           </div>
 
           <h1 className="mt-5 max-w-4xl text-[2.5rem] font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl">
@@ -277,7 +276,11 @@ export default function ProjectDetails({
             {project.subtitle}
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2 sm:mt-8">
+          <p className="mt-8 max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
+            {project.description}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-2">
             {projectData.technologies.map(
               (technology) => (
                 <span
@@ -292,78 +295,269 @@ export default function ProjectDetails({
         </div>
       </section>
 
-      {/* SCREENSHOT PLACEHOLDER */}
+      {/* FEATURED SCREEN */}
 
       <section className="px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
-          <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#09090c] sm:min-h-[400px] sm:rounded-3xl lg:min-h-[500px]">
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#09090c] sm:rounded-3xl">
             <GridBackground />
 
-            <div className="relative z-10 px-5 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-700 sm:text-xs sm:tracking-[0.25em]">
-                {
-                  t.projects.details
-                    .screenshotPlaceholder
-                }
-              </div>
+            <div className="relative z-10 flex min-h-[420px] items-center justify-center px-6 py-12 sm:min-h-[560px] sm:py-16">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-[2rem] bg-violet-500/10 blur-3xl" />
 
-              <div className="mt-3 text-base text-zinc-500 sm:text-xl">
-                {project.title}
+                <Image
+                  src="/projects/garage-system/dashboard.jpg"
+                  alt={project.gallery.featuredAlt}
+                  width={366}
+                  height={552}
+                  priority
+                  className="relative h-auto w-[220px] rounded-[1.4rem] border border-white/10 shadow-2xl sm:w-[250px] lg:w-[280px]"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* PROBLEM */}
 
       <TextSection
-        eyebrow={t.projects.details.about}
-        text={project.description}
+        eyebrow={project.problem.title}
+        text={project.problem.description}
       />
 
       {/* ARCHITECTURE */}
 
       <section className="border-y border-white/10 bg-white/[0.015] px-4 py-20 sm:px-6 sm:py-28">
         <div className="mx-auto max-w-6xl">
-          <SectionLabel>
-            {t.projects.details.architecture}
-          </SectionLabel>
+          <div className="grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
+            <div>
+              <SectionLabel>
+                {project.architecture.title}
+              </SectionLabel>
+            </div>
 
-          <div className="mt-7 flex min-h-[220px] items-center justify-center rounded-2xl border border-dashed border-white/10 bg-black/20 px-5 text-center sm:mt-10 sm:min-h-[320px] sm:px-8">
-            <span className="max-w-md text-sm leading-7 text-zinc-600">
-              {
-                t.projects.details
-                  .architecturePlaceholder
-              }
-            </span>
+            <div>
+              <p className="max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
+                {project.architecture.description}
+              </p>
+
+              <GarageArchitectureDiagram
+                diagram={project.architecture.diagram}
+              />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* FUNCTIONALITY */}
+
+      <ListSection
+        title={project.functionality.title}
+        items={project.functionality.items}
+      />
+
+      {/* TECHNICAL HIGHLIGHTS */}
+
+      <section className="border-y border-white/10 bg-white/[0.015] px-4 py-20 sm:px-6 sm:py-28">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
+            <div>
+              <SectionLabel>
+                {project.highlights.title}
+              </SectionLabel>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {project.highlights.items.map(
+                (item, index) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/10 bg-black/20 p-5 sm:p-6"
+                  >
+                    <div className="font-mono text-[10px] text-violet-400">
+                      0{index + 1}
+                    </div>
+
+                    <p className="mt-4 text-sm leading-7 text-zinc-300 sm:text-base">
+                      {item}
+                    </p>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RESULT */}
+
+      <TextSection
+        eyebrow={project.result.title}
+        text={project.result.description}
+      />
+
       {/* GALLERY */}
 
-      <section className="px-4 py-20 sm:px-6 sm:py-28">
+      <section className="border-t border-white/10 px-4 py-20 sm:px-6 sm:py-28">
         <div className="mx-auto max-w-6xl">
           <SectionLabel>
-            {t.projects.details.gallery}
+            {project.gallery.title}
           </SectionLabel>
 
-          <div className="mt-7 grid gap-4 sm:mt-10 sm:gap-5 md:grid-cols-3">
-            {[1, 2, 3].map((image) => (
-              <div
-                key={image}
-                className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02]"
-              >
-                <span className="font-mono text-[10px] text-zinc-700 sm:text-xs">
-                  screenshot_{image}
-                </span>
-              </div>
-            ))}
+          <p className="mt-6 max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg">
+            {project.gallery.description}
+          </p>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <GarageProjectImage
+              src="/projects/garage-system/login.jpg"
+              alt={project.gallery.loginAlt}
+              width={357}
+              height={557}
+            />
+
+            <GarageProjectImage
+              src="/projects/garage-system/automation-settings.jpg"
+              alt={project.gallery.automationAlt}
+              width={788}
+              height={1281}
+            />
+
+            <GarageProjectImage
+              src="/projects/garage-system/movement-alert.jpg"
+              alt={project.gallery.notificationAlt}
+              width={438}
+              height={341}
+            />
+
+            <GarageProjectImage
+              src="/projects/garage-system/hardware.jpg"
+              alt={project.gallery.hardwareAlt}
+              width={885}
+              height={857}
+            />
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+function GarageArchitectureDiagram({
+  diagram,
+}: {
+  diagram: {
+    mobileClient: string;
+    server: string;
+    controller: string;
+    database: string;
+    hardware: string;
+
+    mobileTechnologies: string;
+    serverTechnologies: string;
+    controllerTechnologies: string;
+    databaseTechnologies: string;
+    hardwareTechnologies: string;
+
+    apiConnection: string;
+    databaseConnection: string;
+    gpioConnection: string;
+  };
+}) {
+  return (
+    <div className="mt-10 rounded-2xl border border-white/10 bg-[#08080b] p-5 sm:p-8">
+      <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
+        <ArchitectureNode
+          eyebrow={diagram.mobileClient}
+          title="Android"
+          technologies={
+            diagram.mobileTechnologies
+          }
+        />
+
+        <ArchitectureConnection
+          label={diagram.apiConnection}
+        />
+
+        <ArchitectureNode
+          eyebrow={diagram.server}
+          title="Flask"
+          technologies={
+            diagram.serverTechnologies
+          }
+        />
+
+        <ArchitectureConnection
+          label={diagram.apiConnection}
+        />
+
+        <ArchitectureNode
+          eyebrow={diagram.controller}
+          title="Raspberry Pi"
+          technologies={
+            diagram.controllerTechnologies
+          }
+        />
+
+        <ArchitectureConnection
+          label={diagram.gpioConnection}
+        />
+
+        <ArchitectureNode
+          eyebrow={diagram.hardware}
+          title="Hardware"
+          technologies={
+            diagram.hardwareTechnologies
+          }
+        />
+      </div>
+
+      <div className="mt-5 flex flex-col items-center lg:ml-[26%] lg:w-[22%]">
+        <div className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-700">
+          {diagram.databaseConnection}
+        </div>
+
+        <div className="py-2 text-zinc-700">
+          ↓
+        </div>
+
+        <div className="w-full">
+          <ArchitectureNode
+            eyebrow={diagram.database}
+            title="MySQL"
+            technologies={
+              diagram.databaseTechnologies
+            }
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GarageProjectImage({
+  src,
+  alt,
+  width,
+  height,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}) {
+  return (
+    <div className="flex min-h-[320px] items-center justify-center rounded-2xl border border-white/10 bg-[#09090c] p-4 sm:min-h-[420px] sm:p-6">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className="h-auto max-h-[420px] w-auto max-w-full rounded-xl border border-white/10 object-contain"
+      />
+    </div>
   );
 }
 
@@ -492,9 +686,11 @@ function ArchitectureDiagram({
     mobileClient: string;
     localServer: string;
     posDatabase: string;
+
     mobileTechnologies: string;
     serverTechnologies: string;
     databaseTechnologies: string;
+
     apiConnection: string;
     repositoryConnection: string;
   };
@@ -579,6 +775,7 @@ function ArchitectureConnection({
 
       <div className="text-zinc-700">
         <span className="lg:hidden">↓</span>
+
         <span className="hidden lg:inline">
           →
         </span>
@@ -793,6 +990,7 @@ function SyncArrow() {
   return (
     <div className="flex items-center justify-center text-zinc-700">
       <span className="md:hidden">↓</span>
+
       <span className="hidden md:inline">
         →
       </span>

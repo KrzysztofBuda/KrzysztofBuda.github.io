@@ -209,12 +209,120 @@ export const pl = {
     },
 
     garage: {
-      title: "System zarządzania garażem",
-      subtitle: "IOT / BACKEND / ANDROID",
+  title: "System zarządzania garażem",
+  subtitle: "IOT / BACKEND / ANDROID",
 
-      description:
-        "Kompletny system łączący aplikację Android, serwer HTTP, Raspberry Pi oraz bazę danych MySQL. System steruje bramą garażową, alarmem i oświetleniem.",
+  status: "Projekt ukończony",
+
+  description:
+    "Kompletny system IoT łączący aplikację Android, serwer REST API, Raspberry Pi oraz bazę danych MySQL. Umożliwia zdalne sterowanie bramą garażową, oświetleniem i alarmem oraz monitorowanie zdarzeń w garażu.",
+
+  problem: {
+    title: "Problem",
+
+    description:
+      "Celem projektu było stworzenie jednego systemu pozwalającego monitorować i sterować garażem z poziomu telefonu. Rozwiązanie miało obsługiwać bramę, oświetlenie, alarm oraz czujniki ruchu, a także umożliwiać pracę automatyczną według harmonogramów.",
+  },
+
+  architecture: {
+    title: "Architektura",
+
+    description:
+      "System został podzielony na trzy główne części: aplikację mobilną Android, serwer aplikacyjny oraz kontroler sprzętowy oparty na Raspberry Pi. Aplikacja i Raspberry Pi komunikują się z serwerem przez HTTP i JSON, a serwer przechowuje stan systemu oraz konfigurację w bazie MySQL.",
+
+    diagram: {
+      mobileClient: "APLIKACJA MOBILNA",
+      server: "SERWER",
+      controller: "STEROWNIK IoT",
+      database: "BAZA DANYCH",
+      hardware: "URZĄDZENIA",
+
+      mobileTechnologies:
+        "Kotlin · Android",
+
+      serverTechnologies:
+        "Python · Flask · REST API",
+
+      controllerTechnologies:
+        "Raspberry Pi 3B · Python · GPIO",
+
+      databaseTechnologies:
+        "MySQL",
+
+      hardwareTechnologies:
+        "Brama · PIR · Alarm · Oświetlenie",
+
+      apiConnection:
+        "HTTP / JSON",
+
+      databaseConnection:
+        "SQL",
+
+      gpioConnection:
+        "GPIO / przekaźniki",
     },
+  },
+
+  functionality: {
+    title: "Co zbudowałem",
+
+    items: [
+      "Aplikację Android umożliwiającą logowanie użytkownika i zdalne zarządzanie garażem.",
+      "Ręczne sterowanie bramą garażową, oświetleniem i systemem alarmowym.",
+      "Konfigurację harmonogramów automatycznej pracy alarmu i oświetlenia.",
+      "Powiadomienia Android o zdarzeniach wykrytych przez system.",
+      "Serwer REST API napisany w Pythonie z wykorzystaniem Flask.",
+      "Bazę MySQL przechowującą użytkowników, ustawienia, stany urządzeń i historię zdarzeń.",
+      "Program dla Raspberry Pi obsługujący czujniki ruchu PIR, krańcówki, przekaźniki i silnik bramy.",
+      "Komunikację pomiędzy aplikacją, serwerem i Raspberry Pi przez HTTP oraz JSON.",
+    ],
+  },
+
+  highlights: {
+    title: "Najciekawsze elementy techniczne",
+
+    items: [
+      "Połączenie aplikacji mobilnej, backendu, bazy danych oraz fizycznych urządzeń w jeden działający system.",
+      "Sterowanie rzeczywistym sprzętem z wykorzystaniem GPIO i modułu przekaźników.",
+      "Obsługa przerwań generowanych przez czujniki ruchu PIR.",
+      "Automatyczne zatrzymywanie napędu bramy na podstawie czujników krańcowych.",
+      "Praca automatyczna urządzeń według harmonogramów zapisanych w bazie danych.",
+      "Usługa Android działająca w tle i generująca powiadomienia o zdarzeniach.",
+    ],
+  },
+
+  result: {
+    title: "Rezultat",
+
+    description:
+      "Projekt zakończył się działającym prototypem systemu, w którym aplikacja mobilna komunikowała się z serwerem, a Raspberry Pi sterowało rzeczywistymi urządzeniami. System pozwalał zarówno na ręczne sterowanie garażem, jak i automatyczną pracę oraz reakcję na zdarzenia z czujników.",
+  },
+
+  gallery: {
+    title: "Projekt w praktyce",
+
+    description:
+      "Poniższe materiały pokazują rzeczywisty interfejs aplikacji oraz układ sprzętowy wykorzystany podczas realizacji projektu.",
+
+    featuredAlt:
+      "System zarządzania garażem — główny ekran aplikacji",
+
+    loginAlt:
+      "System zarządzania garażem — ekran logowania",
+
+    dashboardAlt:
+      "System zarządzania garażem — sterowanie urządzeniami",
+
+    automationAlt:
+      "System zarządzania garażem — ustawienia pracy automatycznej",
+
+    notificationAlt:
+      "System zarządzania garażem — powiadomienie alarmowe",
+
+    hardwareAlt:
+      "System zarządzania garażem — rzeczywisty układ sprzętowy",
+  },
+},
 
     pizza: {
       title: "Aplikacja do zamawiania pizzy",

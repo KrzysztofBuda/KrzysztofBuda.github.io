@@ -468,70 +468,184 @@ function GarageArchitectureDiagram({
 }) {
   return (
     <div className="mt-10 rounded-2xl border border-white/10 bg-[#08080b] p-5 sm:p-8">
-      <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
+      {/* MOBILE / TABLET */}
+
+      <div className="flex flex-col lg:hidden">
         <ArchitectureNode
           eyebrow={diagram.mobileClient}
           title="Android"
-          technologies={
-            diagram.mobileTechnologies
-          }
+          technologies={diagram.mobileTechnologies}
         />
 
-        <ArchitectureConnection
+        <GarageVerticalConnection
           label={diagram.apiConnection}
         />
 
         <ArchitectureNode
           eyebrow={diagram.server}
           title="Flask"
-          technologies={
-            diagram.serverTechnologies
-          }
+          technologies={diagram.serverTechnologies}
         />
 
-        <ArchitectureConnection
+        <div className="my-4 ml-5 flex items-center gap-3 sm:ml-10">
+          <GarageHorizontalConnection
+            label={diagram.databaseConnection}
+          />
+
+          <div className="min-w-0 flex-1">
+            <ArchitectureNode
+              eyebrow={diagram.database}
+              title="MySQL"
+              technologies={diagram.databaseTechnologies}
+            />
+          </div>
+        </div>
+
+        <GarageVerticalConnection
           label={diagram.apiConnection}
         />
 
         <ArchitectureNode
           eyebrow={diagram.controller}
           title="Raspberry Pi"
-          technologies={
-            diagram.controllerTechnologies
-          }
+          technologies={diagram.controllerTechnologies}
         />
 
-        <ArchitectureConnection
+        <GarageVerticalConnection
           label={diagram.gpioConnection}
         />
 
         <ArchitectureNode
           eyebrow={diagram.hardware}
           title="Hardware"
-          technologies={
-            diagram.hardwareTechnologies
-          }
+          technologies={diagram.hardwareTechnologies}
         />
       </div>
 
-      <div className="mt-5 flex flex-col items-center lg:ml-[26%] lg:w-[22%]">
-        <div className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-700">
-          {diagram.databaseConnection}
+      {/* DESKTOP */}
+
+      <div className="hidden lg:grid lg:grid-cols-[1fr_minmax(220px,280px)_76px_minmax(200px,240px)_1fr] lg:items-center">
+        {/* ANDROID */}
+
+        <div className="col-start-2 row-start-1">
+          <ArchitectureNode
+            eyebrow={diagram.mobileClient}
+            title="Android"
+            technologies={diagram.mobileTechnologies}
+          />
         </div>
 
-        <div className="py-2 text-zinc-700">
-          ↓
+        {/* ANDROID <-> FLASK */}
+
+        <div className="col-start-2 row-start-2 py-3">
+          <GarageVerticalConnection
+            label={diagram.apiConnection}
+          />
         </div>
 
-        <div className="w-full">
+        {/* FLASK */}
+
+        <div className="col-start-2 row-start-3">
+          <ArchitectureNode
+            eyebrow={diagram.server}
+            title="Flask"
+            technologies={diagram.serverTechnologies}
+          />
+        </div>
+
+        {/* FLASK <-> MYSQL */}
+
+        <div className="col-start-3 row-start-3">
+          <GarageHorizontalConnection
+            label={diagram.databaseConnection}
+          />
+        </div>
+
+        <div className="col-start-4 row-start-3">
           <ArchitectureNode
             eyebrow={diagram.database}
             title="MySQL"
-            technologies={
-              diagram.databaseTechnologies
-            }
+            technologies={diagram.databaseTechnologies}
           />
         </div>
+
+        {/* FLASK <-> RASPBERRY PI */}
+
+        <div className="col-start-2 row-start-4 py-3">
+          <GarageVerticalConnection
+            label={diagram.apiConnection}
+          />
+        </div>
+
+        {/* RASPBERRY PI */}
+
+        <div className="col-start-2 row-start-5">
+          <ArchitectureNode
+            eyebrow={diagram.controller}
+            title="Raspberry Pi"
+            technologies={diagram.controllerTechnologies}
+          />
+        </div>
+
+        {/* RASPBERRY PI <-> HARDWARE */}
+
+        <div className="col-start-2 row-start-6 py-3">
+          <GarageVerticalConnection
+            label={diagram.gpioConnection}
+          />
+        </div>
+
+        {/* HARDWARE */}
+
+        <div className="col-start-2 row-start-7">
+          <ArchitectureNode
+            eyebrow={diagram.hardware}
+            title="Hardware"
+            technologies={diagram.hardwareTechnologies}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GarageVerticalConnection({
+  label,
+}: {
+  label: string;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-1.5 py-3">
+      <div className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-700">
+        {label}
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="text-sm leading-none text-zinc-700"
+      >
+        ↕
+      </div>
+    </div>
+  );
+}
+
+function GarageHorizontalConnection({
+  label,
+}: {
+  label: string;
+}) {
+  return (
+    <div className="flex min-w-[60px] flex-col items-center justify-center gap-1.5 px-2">
+      <div className="font-mono text-[8px] uppercase tracking-[0.15em] text-zinc-700">
+        {label}
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="text-sm leading-none text-zinc-700"
+      >
+        ↔
       </div>
     </div>
   );

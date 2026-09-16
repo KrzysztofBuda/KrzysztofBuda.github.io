@@ -54,159 +54,211 @@ export const pl = {
         "Diagram architektury projektu dodamy tutaj później.",
     },
 
-    mobileWaiter: {
-        title: "Mobilny Kelner",
-        subtitle: "ANDROID / POS",
+mobileWaiter: {
+  title: "Mobilny Kelner",
+  subtitle: "ANDROID / POS",
 
-        status: "W trakcie rozwoju",
+  status: "W trakcie rozwoju",
 
-        description:
-            "Rozwijany system mobilnej obsługi gastronomii składający się z aplikacji Android oraz lokalnego serwera REST API integrującego urządzenia mobilne z istniejącym systemem POS i bazą danych Firebird.",
+  description:
+    "Rozwijany system mobilnej obsługi gastronomii składający się z aplikacji Android oraz lokalnego serwera REST API integrującego urządzenia mobilne z istniejącym systemem POS i bazą danych Firebird.",
 
-        problem: {
-            title: "Problem",
+  problem: {
+    title: "Problem",
 
-            description:
-            "Celem projektu jest umożliwienie kelnerowi pracy bezpośrednio z urządzenia mobilnego, przy jednoczesnym zachowaniu integracji z istniejącym środowiskiem gastronomicznym. Aplikacja nie zastępuje systemu POS — rozszerza go o mobilny interfejs i bezpieczną komunikację z lokalnym serwerem.",
-        },
+    description:
+      "Celem projektu jest umożliwienie kelnerowi pracy bezpośrednio z urządzenia mobilnego, przy jednoczesnym zachowaniu integracji z istniejącym środowiskiem gastronomicznym. Aplikacja nie zastępuje systemu POS — rozszerza go o mobilny interfejs i bezpieczną komunikację z lokalnym serwerem.",
+  },
 
-        architecture: {
-            title: "Architektura",
+  architecture: {
+    title: "Architektura",
 
-            description:
-              "System składa się z natywnej aplikacji Android oraz lokalnego backendu. Klient komunikuje się z serwerem przez REST API, a dane statyczne są przesyłane strumieniowo w formacie NDJSON i zapisywane lokalnie w Room. Backend odpowiada za integrację z bazą Firebird systemu POS, autoryzację oraz logikę biznesową.",
-            
-            
-            diagram: {
-                mobileClient: "KLIENT MOBILNY",
-                localServer: "LOKALNY SERWER",
-                posDatabase: "BAZA POS",
+    description:
+      "System składa się z natywnej aplikacji Android oraz lokalnego backendu. Dane statyczne są synchronizowane strumieniowo przez NDJSON i przechowywane lokalnie w Room, natomiast bieżący stan stolików i rachunków jest utrzymywany przez Dynamic Runtime. Backend odpowiada za integrację z bazą Firebird systemu POS, autoryzację, uprawnienia oraz logikę biznesową.",
 
-                mobileTechnologies:
-                "Kotlin · Jetpack Compose",
+    diagram: {
+      mobileClient: "KLIENT MOBILNY",
+      localServer: "LOKALNY SERWER",
+      posDatabase: "BAZA POS",
 
-                serverTechnologies:
-                "Python · JWT · Logika biznesowa",
+      mobileTechnologies:
+        "Kotlin · Jetpack Compose",
 
-                databaseTechnologies:
-                "Użytkownicy · Rachunki · Zamówienia",
+      serverTechnologies:
+        "FastAPI · JWT · Logika biznesowa",
 
-                apiConnection: "REST API / JSON",
-                repositoryConnection: "Repozytoria",
-            },
-        },
+      databaseTechnologies:
+        "Użytkownicy · Rachunki · Zamówienia",
 
-
-        staticSync: {
-          title: "Synchronizacja danych statycznych",
-
-          description:
-            "Nowe dane nie zastępują od razu lokalnej kopii używanej przez aplikację. Snapshot jest najpierw pobierany strumieniowo, zapisywany jako STAGING i walidowany. Dopiero poprawny zestaw danych zostaje atomowo aktywowany. W przypadku błędu poprzedni ACTIVE snapshot pozostaje dostępny.",
-
-          diagram: {
-            source: "BAZA POS",
-            server: "LOKALNY SERWER",
-            stream: "NDJSON STREAM",
-            staging: "STAGING",
-            validation: "WALIDACJA",
-            active: "ACTIVE",
-            application: "ANDROID UI",
-
-            sourceDetails: "Dane statyczne",
-            serverDetails:
-              "REST API · logika biznesowa",
-            streamDetails: "Strumieniowe chunki",
-            stagingDetails: "Room snapshot",
-            validationDetails:
-              "Schema · kolejność · relacje",
-            activeDetails:
-              "Poprawna wersja danych",
-            applicationDetails:
-              "Dane dostępne dla UI",
-
-            success: "POPRAWNY",
-            failure: "BŁĄD",
-
-            successDescription:
-              "Atomowa aktywacja",
-
-            failureDescription:
-              "STAGING usuwany · poprzedni ACTIVE pozostaje",
-
-            validationAction: "Walidacja",
-            previousActive: "POPRZEDNI ACTIVE",
-            preserved: "pozostaje zachowany",
-          },
-        },
-
-        currentState: {
-            title: "Co działa obecnie",
-
-            items: [
-              "Logowanie użytkownika za pomocą PIN-u i sesja oparta o JWT.",
-              "Identyfikacja każdej instalacji aplikacji przez własny UUID urządzenia.",
-              "Konfiguracja protokołu, adresu i portu lokalnego serwera.",
-              "Synchronizacja danych statycznych z backendu do lokalnej bazy Room.",
-              "Strumieniowe przetwarzanie snapshotu w formacie NDJSON.",
-              "Synchronizacja sal, stolików, produktów, grup, VAT, metod płatności, komentarzy i struktury menu.",
-              "Walidacja kolejności danych, chunków, wersji schematu i relacji między rekordami.",
-              "Bezpieczne stagingowanie nowego snapshotu przed jego aktywacją.",
-              "Atomowa aktywacja poprawnych danych z zachowaniem poprzedniej wersji w przypadku błędu.",
-              "Ręczna synchronizacja dostępna bez logowania bezpośrednio z ekranu PIN.",
-              "Obsługa języka polskiego, angielskiego i ukraińskiego oraz motywu systemowego, jasnego i ciemnego.",
-            ],
-        },
-
-        highlights: {
-            title: "Najciekawsze elementy techniczne",
-
-            items: [
-              "Snapshot-based synchronization z lokalną bazą Room zamiast bezpośredniej pracy klienta na bazie POS.",
-              "Strumieniowe przesyłanie dużych zestawów danych przez NDJSON.",
-              "Staging i atomowa aktywacja snapshotu — błędna synchronizacja nie zastępuje ostatniej poprawnej wersji danych.",
-              "Walidacja integralności danych obejmująca kolejność stage, chunki oraz relacje między encjami.",
-              "Niezależne wersjonowanie kontraktu synchronizacji i schematu lokalnej bazy danych.",
-              "Warstwowa architektura oddzielająca klienta Android, API, logikę biznesową i bazę Firebird.",
-            ],
-        },
-
-        roadmap: {
-            title: "Dalszy rozwój",
-
-            items: [
-              "Udostępnienie danych ACTIVE snapshotu warstwie UI.",
-              "Ekran wyboru sali i odwzorowanie fizycznego układu stolików.",
-              "Obsługa otwartych rachunków i dynamicznych statusów stolików.",
-              "Tworzenie rachunku i dodawanie produktów z zsynchronizowanego menu.",
-              "Komentarze do pozycji oraz uwagi do całego zamówienia.",
-              "Egzekwowanie uprawnień użytkowników i zasad rabatowych.",
-              "Płatności, finalizacja rachunku i integracja z drukowaniem po stronie serwera.",
-              "Rozszerzenie testów automatycznych i obsługi scenariuszy utraty połączenia.",
-            ],
-        },
-
-            gallery: {
-            title: "Aktualny interfejs",
-
-            description:
-                "Interfejs aplikacji jest nadal rozwijany. Poniższe ekrany pokazują aktualny stan projektu, w tym logowanie, menu oraz konfigurację aplikacji.",
-
-            featuredAlt:
-                "Mobilny Kelner — ekran logowania PIN",
-
-            loginAlt:
-                "Mobilny Kelner — ekran logowania",
-
-            menuAlt:
-                "Mobilny Kelner — menu aplikacji",
-
-            connectionAlt:
-                "Mobilny Kelner — konfiguracja połączenia",
-
-            settingsAlt:
-                "Mobilny Kelner — ustawienia aplikacji",
-            },
+      apiConnection: "REST API / JSON",
+      repositoryConnection: "Repozytoria",
     },
+  },
+
+  staticSync: {
+    title: "Synchronizacja danych statycznych",
+
+    description:
+      "Nowe dane nie zastępują od razu lokalnej kopii używanej przez aplikację. Snapshot jest najpierw pobierany strumieniowo, zapisywany jako STAGING i walidowany. Dopiero poprawny zestaw danych zostaje atomowo aktywowany. W przypadku błędu poprzedni ACTIVE snapshot pozostaje dostępny.",
+
+    diagram: {
+      source: "BAZA POS",
+      server: "LOKALNY SERWER",
+      stream: "NDJSON STREAM",
+      staging: "STAGING",
+      validation: "WALIDACJA",
+      active: "ACTIVE",
+      application: "ANDROID UI",
+
+      sourceDetails: "Dane statyczne",
+      serverDetails:
+        "REST API · logika biznesowa",
+      streamDetails: "Strumieniowe chunki",
+      stagingDetails: "Room snapshot",
+      validationDetails:
+        "Schema · kolejność · relacje",
+      activeDetails:
+        "Poprawna wersja danych",
+      applicationDetails:
+        "Dane dostępne dla UI",
+
+      success: "POPRAWNY",
+      failure: "BŁĄD",
+
+      successDescription:
+        "Atomowa aktywacja",
+
+      failureDescription:
+        "STAGING usuwany · poprzedni ACTIVE pozostaje",
+
+      validationAction: "Walidacja",
+      previousActive: "POPRZEDNI ACTIVE",
+      preserved: "pozostaje zachowany",
+    },
+  },
+
+runtime: {
+  title: "Dynamic Runtime",
+
+  description:
+    "Dane statyczne są synchronizowane okresowo, ale stan stolików i rachunków zmienia się cały czas. Dynamic Runtime utrzymuje ich aktualny, wersjonowany snapshot, pobiera zmiany z serwera i pozwala natychmiast zastosować efekt wykonanych operacji bez oczekiwania na kolejny cykl synchronizacji.",
+
+  diagram: {
+    server: "SERWER",
+    changes: "ZMIANY RUNTIME",
+    runtime: "RUNTIME",
+    application: "ANDROID UI",
+
+    draft: "LOKALNY DRAFT",
+    outbox: "OUTBOX",
+    command: "OPERACJA",
+
+    serverDetails:
+      "FastAPI · stan źródłowy",
+
+    changesDetails:
+      "/runtime/changes · polling",
+
+    runtimeDetails:
+      "Stoliki · rachunki · rewizje",
+
+    applicationDetails:
+      "Aktualny stan interfejsu",
+
+    draftDetails:
+      "Room · niewysłane zmiany",
+
+    outboxDetails:
+      "request_id · retry · recovery",
+
+    commandDetails:
+      "REST API · idempotencja",
+
+    runtimeEffect:
+      "runtime_effect",
+
+    conflict:
+      "KONFLIKT",
+
+    conflictDetails:
+      "base · server · local",
+
+    retry:
+      "Bezpieczne ponowienie",
+  },
+},
+
+  currentState: {
+    title: "Co działa obecnie",
+
+    items: [
+      "Logowanie użytkownika kodem PIN, sesja JWT oraz identyfikacja urządzenia trwałym UUID.",
+      "Bezpieczna synchronizacja danych statycznych do Room z wykorzystaniem NDJSON, stagingu, walidacji i atomowej aktywacji snapshotu.",
+      "Dynamic Runtime utrzymujący aktualny stan stolików i rachunków oraz automatycznie pobierający zmiany z serwera.",
+      "Ekran sal i fizyczny układ stolików wraz z tworzeniem oraz edycją rachunków, klientem, notatkami, komentarzami i pozycjami zamówienia.",
+      "Obsługa ownership rachunku, przypisywania stanowiska oraz kontrolowanego przejęcia rachunku innego użytkownika.",
+      "Lokalne drafty, trwały outbox, bezpieczne retry oraz wykrywanie konfliktów pomiędzy stanem lokalnym i zmianami z innych urządzeń.",
+      "Przenoszenie i łączenie rachunków z kontrolą rewizji, uprawnień, recovery oraz natychmiastową aktualizacją stanu Runtime.",
+    ],
+  },
+
+  highlights: {
+    title: "Najciekawsze elementy techniczne",
+
+    items: [
+      "Dwuwarstwowa synchronizacja: wersjonowane snapshoty danych statycznych oraz Dynamic Runtime dla bieżącego stanu stolików i rachunków.",
+      "Bezpieczna aktywacja snapshotu Room — błędna synchronizacja nie zastępuje ostatniego poprawnego zestawu danych.",
+      "Trwałe lokalne drafty i outboxy pozwalające kontynuować pracę po restarcie aplikacji lub utracie połączenia.",
+      "Idempotentne operacje wykorzystujące trwałe request ID, dzięki czemu retry po timeout nie wykonuje tej samej operacji ponownie.",
+      "Kontrola współbieżności oparta na rewizjach rachunku oraz three-way diff dla konfliktów lokalnych i serwerowych.",
+      "Przenoszenie i łączenie rachunków z recovery, kontrolą uprawnień, ownership oraz natychmiastowym runtime_effect.",
+    ],
+  },
+
+  roadmap: {
+    title: "Dalszy rozwój",
+
+    items: [
+      "Dokończenie rzeczywistych testów łączenia rachunków na wielu urządzeniach i w scenariuszach utraty połączenia.",
+      "Obsługa rachunku próbnego wraz z drukowaniem po stronie serwera i aktualizacją Runtime.",
+      "Rabaty procentowe i kwotowe dla pozycji oraz całego rachunku wraz z limitami i uprawnieniami użytkownika.",
+      "Rozliczenie rachunku z wyborem metod płatności, fiskalizacją oraz poprawnym zamknięciem rachunku.",
+      "Transfer i dzielenie rachunków z obsługą uprawnień oraz konfliktów.",
+      "Końcowe testy wielourządzeniowe, spięcie automatycznego wylogowania po rachunku oraz dokumentacja systemu.",
+    ],
+  },
+
+  gallery: {
+    title: "Aplikacja w praktyce",
+
+    description:
+      "Interfejs aplikacji obejmuje konfigurację i codzienną pracę z systemem POS — od logowania i ustawień po wybór stolika, obsługę rachunku oraz operacje wykonywane na rachunkach.",
+
+    featuredAlt:
+      "Mobilny Kelner — układ sali i stolików",
+
+    loginAlt:
+      "Mobilny Kelner — ekran logowania PIN",
+
+    menuAlt:
+      "Mobilny Kelner — menu aplikacji",
+
+    connectionAlt:
+      "Mobilny Kelner — konfiguracja połączenia z serwerem",
+
+    settingsAlt:
+      "Mobilny Kelner — ustawienia aplikacji",
+
+    tablesAlt:
+      "Mobilny Kelner — układ sali i stolików",
+
+    orderAlt:
+      "Mobilny Kelner — otwarty rachunek z pozycjami, klientem i lokalnymi zmianami",
+
+    operationsAlt:
+      "Mobilny Kelner — menu operacji na rachunku",
+  },
+},
 
     garage: {
   title: "System zarządzania garażem",

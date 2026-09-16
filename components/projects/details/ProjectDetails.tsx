@@ -89,12 +89,12 @@ export default function ProjectDetails({
                   <div className="absolute inset-0 rounded-[2rem] bg-violet-500/10 blur-3xl" />
 
                   <Image
-                    src="/projects/mobile-waiter/login-dark.png"
-                    alt={project.gallery.featuredAlt}
-                    width={300}
-                    height={669}
-                    priority
-                    className="relative h-auto w-[210px] rounded-[1.4rem] border border-white/10 shadow-2xl sm:w-[230px] lg:w-[250px]"
+                  src="/projects/mobile-waiter/tables-layout.png"
+                  alt={project.gallery.featuredAlt}
+                  width={335}
+                  height={773}
+                  priority
+                  className="relative h-auto w-[230px] rounded-[1.4rem] border border-white/10 shadow-2xl sm:w-[250px] lg:w-[280px]"
                   />
                 </div>
               </div>
@@ -151,6 +151,30 @@ export default function ProjectDetails({
 
                 <StaticSyncDiagram
                   diagram={project.staticSync.diagram}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DYNAMIC RUNTIME */}
+
+        <section className="border-y border-white/10 bg-white/[0.015] px-4 py-20 sm:px-6 sm:py-28">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-8 lg:grid-cols-[300px_1fr] lg:gap-12">
+              <div>
+                <SectionLabel>
+                  {project.runtime.title}
+                </SectionLabel>
+              </div>
+
+              <div>
+                <p className="max-w-3xl text-base leading-8 text-zinc-400 sm:text-lg sm:leading-9">
+                  {project.runtime.description}
+                </p>
+
+                <RuntimeDiagram
+                  diagram={project.runtime.diagram}
                 />
               </div>
             </div>
@@ -217,26 +241,55 @@ export default function ProjectDetails({
               {project.gallery.description}
             </p>
 
-            <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
-              <AppScreenshot
-                src="/projects/mobile-waiter/login-dark.png"
-                alt={project.gallery.loginAlt}
-              />
+            <div className="mt-10 flex flex-wrap justify-center gap-4 md:gap-5">
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/login-dark.png"
+                  alt={project.gallery.loginAlt}
+                />
+              </div>
 
-              <AppScreenshot
-                src="/projects/mobile-waiter/menu-dark.png"
-                alt={project.gallery.menuAlt}
-              />
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/menu-dark.png"
+                  alt={project.gallery.menuAlt}
+                />
+              </div>
 
-              <AppScreenshot
-                src="/projects/mobile-waiter/connection-dark.png"
-                alt={project.gallery.connectionAlt}
-              />
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/connection-dark.png"
+                  alt={project.gallery.connectionAlt}
+                />
+              </div>
 
-              <AppScreenshot
-                src="/projects/mobile-waiter/settings-dark.png"
-                alt={project.gallery.settingsAlt}
-              />
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/settings-dark.png"
+                  alt={project.gallery.settingsAlt}
+                />
+              </div>
+
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/tables-layout.png"
+                  alt={project.gallery.tablesAlt}
+                />
+              </div>
+
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/order-details.png"
+                  alt={project.gallery.orderAlt}
+                />
+              </div>
+
+              <div className="w-[calc(50%_-_0.5rem)] md:w-[calc(25%_-_0.95rem)]">
+                <AppScreenshot
+                  src="/projects/mobile-waiter/operations-menu.png"
+                  alt={project.gallery.operationsAlt}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -914,6 +967,189 @@ function AppScreenshot({
         height={669}
         className="h-auto w-full max-w-[260px] rounded-xl border border-white/10"
       />
+    </div>
+  );
+}
+
+function RuntimeDiagram({
+  diagram,
+}: {
+  diagram: {
+    server: string;
+    changes: string;
+    runtime: string;
+    application: string;
+
+    draft: string;
+    outbox: string;
+    command: string;
+
+    serverDetails: string;
+    changesDetails: string;
+    runtimeDetails: string;
+    applicationDetails: string;
+
+    draftDetails: string;
+    outboxDetails: string;
+    commandDetails: string;
+
+    runtimeEffect: string;
+    conflict: string;
+    conflictDetails: string;
+    retry: string;
+  };
+}) {
+  return (
+    <div className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-[#08080b] p-5 sm:p-8">
+      {/* SERVER STATE */}
+
+      <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-violet-400">
+        {diagram.runtime}
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center">
+        <SyncNode
+          label={diagram.server}
+          title="FastAPI"
+          description={diagram.serverDetails}
+        />
+
+        <RuntimeConnection
+          label={diagram.changesDetails}
+        />
+
+        <SyncNode
+          label={diagram.runtime}
+          title="Runtime"
+          description={diagram.runtimeDetails}
+          accent
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.application}
+          title="Android"
+          description={diagram.applicationDetails}
+        />
+      </div>
+
+      {/* LOCAL CHANGES */}
+
+      <div className="my-6 border-t border-white/10" />
+
+      <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-violet-400">
+        {diagram.draft}
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] md:items-center">
+        <SyncNode
+          label={diagram.draft}
+          title="Room"
+          description={diagram.draftDetails}
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.outbox}
+          title={diagram.retry}
+          description={diagram.outboxDetails}
+          accent
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.command}
+          title="REST API"
+          description={diagram.commandDetails}
+        />
+
+        <SyncArrow />
+
+        <SyncNode
+          label={diagram.server}
+          title="FastAPI"
+          description={diagram.serverDetails}
+        />
+      </div>
+
+      {/* RESULT */}
+
+      <div className="mt-5 grid items-start gap-4 md:grid-cols-2">
+        <div className="rounded-xl border border-emerald-400/15 bg-emerald-400/[0.04] p-4 sm:p-5">
+          <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-300">
+            ✓ {diagram.runtimeEffect}
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-zinc-300">
+            <span>
+              {diagram.server}
+            </span>
+
+            <span
+              aria-hidden="true"
+              className="text-zinc-700"
+            >
+              →
+            </span>
+
+            <span>
+              {diagram.runtime}
+            </span>
+
+            <span
+              aria-hidden="true"
+              className="text-zinc-700"
+            >
+              →
+            </span>
+
+            <span>
+              {diagram.application}
+            </span>
+          </div>
+
+          <div className="mt-3 text-xs leading-6 text-zinc-600">
+            {diagram.runtimeDetails}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
+          <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-500">
+            × {diagram.conflict}
+          </div>
+
+          <div className="mt-3 text-sm leading-6 text-zinc-400">
+            {diagram.conflictDetails}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RuntimeConnection({
+  label,
+}: {
+  label: string;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-2 py-1 md:px-2">
+      <div className="max-w-[150px] text-center font-mono text-[8px] uppercase leading-4 tracking-[0.12em] text-zinc-600">
+        {label}
+      </div>
+
+      <div className="text-zinc-700">
+        <span className="md:hidden">
+          ↓
+        </span>
+
+        <span className="hidden md:inline">
+          →
+        </span>
+      </div>
     </div>
   );
 }
